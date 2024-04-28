@@ -1,0 +1,43 @@
+@import ../../styles/helpers
+
+.galleryContainer
+  padding-left: 10px
+  padding-right: 10px
+  padding-top: 90px
+  +wmin(1024)
+    padding-top: 115px
+
+.emptyResult
+  font-weight: 400
+  font-size: 16px
+  color: #787878
+  margin-top: 25px
+
+.flexImageContainer
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(105px, 1fr))
+  +wmin(531)
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr))
+  +wmin(710)
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
+  +wmin(960)
+    grid-template-columns: repeat(auto-fill, minmax(204px, 1fr))
+  gap: 10px
+  padding-bottom: 100px
+  .ant-image,
+  .picturePlug
+    width: 100%
+    padding-bottom: 100%
+    position: relative
+    img,
+    .picturePlugImage
+      object-fit: cover
+      border-radius: 7px
+      border: 1px solid #e8e8e8
+      width: 100%
+      height: 100%
+      position: absolute
+      left: 0
+    .picturePlugImage
+      width: calc(100% - 3px)
+      height: calc(100% - 3px)
