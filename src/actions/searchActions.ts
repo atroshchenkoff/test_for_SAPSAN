@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+const PER_PAGE = import.meta.env.VITE_PER_PAGE || 25
 const UNSPLASH_API_CLIENT_ID = import.meta.env.VITE_UNSPLASH_API_CLIENT_ID || ''
 const UNSPLASH_API = `https://api.unsplash.com/search/photos?client_id=${UNSPLASH_API_CLIENT_ID}`
 
@@ -45,7 +46,7 @@ export const getPicturesByKeyword = async ({
   const { keyword, page } = input
   try {
     const response = await axios.get(
-      `${UNSPLASH_API}&query=${keyword}&page=${page}&per_page=25`
+      `${UNSPLASH_API}&query=${keyword}&page=${page}&per_page=${PER_PAGE}`
     )
     return response.data
   } catch (error) {

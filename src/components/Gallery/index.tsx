@@ -7,11 +7,13 @@ import './gallery.sass'
 
 function GalleryComponent({
   isEmpty,
+  isLoading,
   pictures,
   picturePlugs,
   sendToSearchMachine,
 }: {
   isEmpty: boolean
+  isLoading: boolean
   pictures: Picture[]
   picturePlugs: number[]
   sendToSearchMachine: SearchMachineSendAction
@@ -25,8 +27,12 @@ function GalleryComponent({
     const windowHeight =
       window.innerHeight || document.documentElement.clientHeight
 
-    // Если верхняя граница заглушки видна на экране, загрузить следующую страницу
-    if (picturePlugRect.top <= windowHeight) {
+    // Если верхняя или нижняя граница заглушки видна на экране, загрузить следующую страницу
+    if (
+      (picturePlugRect.top <= windowHeight ||
+        picturePlugRect.bottom <= windowHeight) &&
+      !isLoading
+    ) {
       sendToSearchMachine({ type: 'LOAD_NEXT_PAGE' })
     }
   }
@@ -35,6 +41,26 @@ function GalleryComponent({
     // Проверяем видимость заглушек при изменении списка изображений
     checkPicturePlugVisibility()
   }, [picturePlugs])
+
+  const handleScroll = () => {
+    // Проверяем, если пользователь пролистал до элемента-заглушки в конце списка
+    const firstPicturePlugElement = document.getElementById('first-plug')
+    if (
+      firstPicturePlugElement &&
+      firstPicturePlugElement.getBoundingClientRect().top <=
+        window.innerHeight &&
+      !isLoading
+    ) {
+      sendToSearchMachine({ type: 'LOAD_NEXT_PAGE' }) // Загружаем следующую страницу
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [pictures])
 
   return (
     <div className="galleryContainer">
@@ -71,10 +97,11 @@ function GalleryComponent({
                   preview={{
                     src: picture.urls.regular,
                   }}
+                  loading="lazy"
                 />
               ))}
           </Image.PreviewGroup>
-          {picturePlugs &&
+          {picturePlugs.length > 0 &&
             picturePlugs.map((item, index) => (
               <div
                 key={item}

@@ -2,6 +2,7 @@ import {
   CSSProperties,
   ChangeEvent,
   HTMLInputTypeAttribute,
+  KeyboardEventHandler,
   MouseEvent,
   useRef,
 } from 'react'
@@ -18,6 +19,7 @@ const InputComponent = ({
   name,
   onChange,
   onClear,
+  onKeyUp,
   placeholder,
   readOnly,
   required,
@@ -35,6 +37,7 @@ const InputComponent = ({
   name?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   onClear?: (e: MouseEvent<HTMLElement>) => void
+  onKeyUp?: KeyboardEventHandler<HTMLInputElement>
   placeholder?: string
   readOnly?: boolean
   required?: boolean
@@ -59,6 +62,7 @@ const InputComponent = ({
           type={type}
           name={name}
           onChange={onChange}
+          onKeyUp={onKeyUp}
           placeholder={placeholder}
           value={value}
           style={inputStyle}

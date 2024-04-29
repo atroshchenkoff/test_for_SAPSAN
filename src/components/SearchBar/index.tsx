@@ -15,6 +15,11 @@ function SearchBarComponent({
 }) {
   const handleStartSearch = () => {
     sendToSearchMachine({ type: 'NEW_SEARCH' })
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
 
   const handleSearchInputChange = useCallback(({ target: { value } }) => {
@@ -53,6 +58,7 @@ function SearchBarComponent({
             onChange={handleSearchInputChange}
             onClear={() => handleSearchInputClear()}
             iconSize={17}
+            onKeyUp={(e) => e.key === 'Enter' && handleStartSearch()}
           />
           <Button text="Искать" onClick={handleStartSearch} />
         </div>

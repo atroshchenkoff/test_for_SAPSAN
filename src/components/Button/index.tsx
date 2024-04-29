@@ -1,8 +1,6 @@
 import { CSSProperties, MouseEvent } from 'react'
 import styled from '@emotion/styled'
 
-export type IconType = 'search' | 'close'
-
 const ButtonComponent = ({
   text,
   className,

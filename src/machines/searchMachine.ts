@@ -1,6 +1,9 @@
 import { assign, setup, fromPromise, raise } from 'xstate'
 import { Picture, getPicturesByKeyword } from 'actions/searchActions'
 
+const PER_PAGE_STRING = import.meta.env.VITE_PER_PAGE || 25
+const PER_PAGE = Number(PER_PAGE_STRING)
+
 interface SearchMachineContext {
   picturesFromCurrentPage: Picture[]
   pictures: Picture[]
@@ -61,17 +64,6 @@ export const searchMachine = setup({
       }),
       target: '.loading',
     },
-    CREATE_PICTURE_PLUGS: {
-      actions: assign({
-        picturePlugs: ({ context }) => {
-          const plugsCount = context.totalPictures - context.pictures?.length
-          const plugs = Array(plugsCount)
-            .fill(0)
-            .map((e, i) => i + 1)
-          return plugs
-        },
-      }),
-    },
   },
   states: {
     idle: {},
@@ -105,9 +97,14 @@ export const searchMachine = setup({
             ...context.pictures,
             ...context.picturesFromCurrentPage,
           ],
+          picturePlugs: () => [],
         }),
-        raise({ type: 'CREATE_PICTURE_PLUGS' }),
       ],
+      after: {
+        1000: {
+          actions: raise({ type: 'CREATE_PICTURE_PLUGS' }),
+        },
+      },
       on: {
         LOAD_NEXT_PAGE: {
           actions: assign({
@@ -120,6 +117,19 @@ export const searchMachine = setup({
           guard: ({ context }) => {
             return context.page < context.totalPages
           },
+        },
+        CREATE_PICTURE_PLUGS: {
+          actions: assign({
+            picturePlugs: ({ context }) => {
+              const { totalPictures, pictures } = context
+              const difference = totalPictures - pictures?.length
+              const plugsCount = difference < PER_PAGE ? difference : PER_PAGE
+              const plugs = Array(plugsCount)
+                .fill(0)
+                .map((_, i) => i + 1)
+              return plugs
+            },
+          }),
         },
       },
     },
