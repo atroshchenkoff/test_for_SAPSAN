@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+# Picture Searcher
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Установка зависимостей
 
-Currently, two official plugins are available:
+В корне каталога выполнить команду:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Настройка окружения
+
+Необходимо создать папку `environments/` в корне каталога. После чего поместить в неё файлы окружений:
+
+- `.env.development`
+- `.env.production`
+
+Необходимы следующие переменные:
+
+```env
+VITE_UNSPLASH_API_CLIENT_ID="your-unsplash-api-id"
+VITE_PER_PAGE=25
+```
+
+В текущей реализации переменные имеют одинаковые значения для обоих окружений.
+
+## Запуск проекта локально
+
+В корне каталога выполнить одну из команд для соответствующего окружения:
+
+```bash
+npm run start:dev
+// or
+npm run start:prod
+```
+
+Так же можно запустить проект с возможностью превью на мобильных девайсах:
+
+```bash
+npm run start:dev:mobile
+// or
+npm run start:prod:mobile
+```
+
+## Сборка проекта
+
+В корне каталога выполнить одну из команд для соответствующего окружения:
+
+```bash
+npm run build:dev
+// or
+npm run build:prod
+```
+
+Папка `build` в корне будет содержать всё необходимое для деплоя
