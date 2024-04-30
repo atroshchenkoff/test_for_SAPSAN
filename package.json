@@ -6,6 +6,8 @@
   "scripts": {
     "start:dev": "vite --mode development",
     "start:prod": "vite --mode production",
+    "start:dev:mobile": "vite --mode development --host",
+    "start:prod:mobile": "vite --mode production --host",
     "build:dev": "tsc && vite build --mode development",
     "build:prod": "tsc && vite build --mode production",
     "dev": "vite",
