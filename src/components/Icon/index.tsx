@@ -48,16 +48,15 @@ const IconComponent = ({
 
 const Icon = styled(IconComponent)`
   position: absolute;
-  // font-size: ${({ size }) => `${size ? size + 1 : 20}px`};
-  height: ${({ size }) => `${size ? size : 20}px`};
+  height: ${({ size }) => `${size ? size : 22}px`};
   padding-left: 10px;
-  padding-top: 15px;
+  padding-top: 13px;
   transition: all 0.3s ease-in-out;
   z-index: 1;
 
   svg {
-    height: ${({ size }) => `${size ? size : 20}px`};
-    width: ${({ size }) => `${size ? size : 20}px`};
+    height: ${({ size }) => `${size ? size : 22}px`};
+    width: ${({ size }) => `${size ? size : 22}px`};
     fill: #c4c4c4;
   }
 `

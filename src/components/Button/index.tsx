@@ -21,7 +21,7 @@ const ButtonComponent = ({
 
 const Button = styled(ButtonComponent)`
   height: 48px;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : '82px')};
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : '84px')};
   min-width: 82px;
   background: #eb0c0c;
   border: none;

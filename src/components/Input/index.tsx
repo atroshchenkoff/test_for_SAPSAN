@@ -74,7 +74,7 @@ const InputComponent = ({
             dataTestId="icon-clear"
             type={'close'}
             size={20}
-            style={{ top: 14, right: 10, padding: 0, cursor: 'pointer' }}
+            style={{ top: 15, right: 10, padding: 0, cursor: 'pointer' }}
             onClick={onClear}
           />
         )}
@@ -95,8 +95,9 @@ const Input = styled(InputComponent)`
   input {
     font-family: 'Arial', sans-serif;
     height: 45px;
-    padding-top: 3px;
-    padding-left: 32px;
+    padding-top: 4px;
+    padding-left: 36px;
+    padding-bottom: 0px;
     padding-right: ${({ allowClear = true }) => `${allowClear ? 32 : 0}px`};
     width: -webkit-fill-available;
     font-size: 16px;
@@ -106,6 +107,7 @@ const Input = styled(InputComponent)`
       border,
       color 0.2s ease-in-out;
     background: #eee;
+    appearance: none;
 
     ::placeholder {
       color: #9c9c9c;

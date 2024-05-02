@@ -14,12 +14,11 @@ function SearchBarComponent({
   sendToSearchMachine: SearchMachineSendAction
 }) {
   const handleStartSearch = () => {
-    sendToSearchMachine({ type: 'NEW_SEARCH' })
-
     window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
+      top: -1,
     })
+
+    sendToSearchMachine({ type: 'NEW_SEARCH' })
   }
 
   const handleSearchInputChange = useCallback(({ target: { value } }) => {
@@ -37,7 +36,7 @@ function SearchBarComponent({
         style={
           !isSearchStarted
             ? {
-                marginTop: '30vh',
+                marginTop: '33vh',
               }
             : undefined
         }
@@ -57,7 +56,7 @@ function SearchBarComponent({
             value={searchText}
             onChange={handleSearchInputChange}
             onClear={() => handleSearchInputClear()}
-            iconSize={17}
+            iconSize={23}
             onKeyUp={(e) => e.key === 'Enter' && handleStartSearch()}
           />
           <Button text="Искать" onClick={handleStartSearch} />
